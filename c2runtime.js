@@ -22305,11 +22305,11 @@ cr.behaviors.lunarray_LiteTween = function(runtime)
 	};
 }());
 cr.getObjectRefTable = function () { return [
-	cr.plugins_.Audio,
-	cr.plugins_.Browser,
 	cr.plugins_.Function,
 	cr.plugins_.Mouse,
 	cr.plugins_.Sprite,
+	cr.plugins_.Audio,
+	cr.plugins_.Browser,
 	cr.behaviors.Sin,
 	cr.behaviors.Pin,
 	cr.behaviors.lunarray_LiteTween,
