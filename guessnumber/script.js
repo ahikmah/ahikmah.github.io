@@ -1,38 +1,49 @@
 'use strict';
-let number = Math.trunc(Math.random() * 20) + 1;
-let score = 20;
+const maxNumber = 20;
+const resetNumber = () => Math.trunc(Math.random() * maxNumber) + 1;
+const displayText = (selector, value) =>
+    (document.querySelector(selector).textContent = value);
+const getValue = (selector, value) =>
+    (document.querySelector(selector).value = value);
+const newStyle = selector => document.querySelector(selector).style;
+
+let number = resetNumber();
+let score = maxNumber;
 let highscore = 0;
+
 document.querySelector('.check').addEventListener('click', function() {
     let guess = Number(document.querySelector('.guess').value);
     if (!guess) {
-        document.querySelector('.message').textContent = '📛 No Number!';
+        displayText('.message', '📛No Number!');
     } else if (guess === number) {
-        document.querySelector('.message').textContent = '🎉 YAY! You are Correct!';
-        document.querySelector('.number').textContent = number;
-        document.querySelector('body').style.backgroundColor = '#60b347';
+        displayText('.message', '🎉 YAY! You are Correct!');
+        displayText('.number', number);
+        newStyle('body').backgroundColor = '#60b347';
         if (score > highscore) {
             highscore = score;
-            document.querySelector('.highscore').textContent = highscore;
+            displayText('.highscore', highscore);
         }
     } else if (guess !== number) {
         if (score > 1) {
-            document.querySelector('.message').textContent =
-                guess < number ? '🤔 Too Low! 📉' : '🤔 Too High! 📈';
+            displayText(
+                '.message',
+                guess < number ? '🤔 Too Low! 📉' : '🤔 Too High! 📈'
+            );
             score--;
-            document.querySelector('.score').textContent = score;
+            displayText('.score', score);
         } else {
-            document.querySelector('.message').textContent = 'GAME OVER!😫';
-            document.querySelector('.score').textContent = 0;
+            displayText('.message', 'GAME OVER!😫');
+            displayText('.score', 0);
         }
     }
 });
 
 document.querySelector('.again').addEventListener('click', function() {
-    score = 20;
-    number = Math.trunc(Math.random() * 20) + 1;
-    document.querySelector('.message').textContent = 'Start guessing..';
-    document.querySelector('.score').textContent = score;
-    document.querySelector('.guess').value = '';
-    document.querySelector('body').style.backgroundColor = '#222';
-    document.querySelector('.number').textContent = '?';
+    score = maxNumber;
+    number = resetNumber();
+    displayText('.message', 'Start guessing..');
+    displayText('.score', score);
+    displayText('.number', '?');
+    getValue('.guess', '');
+    newStyle('body').backgroundColor = '#222';
 });
