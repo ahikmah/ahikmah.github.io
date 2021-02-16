@@ -51,7 +51,7 @@ const saveScore = function(activePlayer) {
     currentScore = 0;
     currentScoreEl.textContent = currentScore;
 
-    if (score[activePlayer] >= 20) {
+    if (score[activePlayer] >= 100) {
         winner.textContent = `Player ${activePlayer + 1} Win 🏆`;
         winner.classList.toggle('hidden');
         document
